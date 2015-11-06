@@ -28,6 +28,10 @@ $routes->get('/suunnitelmat/login', function() {
     HelloWorldController::login();
 });
 
+$routes->get('/suunnitelmat/muokkaus', function() {
+HelloWorldController::muokkaus();
+});
+
 $routes->get('/kirjautuminen', function() {
 HelloWorldController::login();
 });

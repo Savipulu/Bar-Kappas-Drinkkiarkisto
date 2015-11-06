@@ -32,4 +32,8 @@
     public static function login() {
         View::make('suunnitelmat/LoginSuunnitelma.html');
     }
+    
+    public static function muokkaus() {
+        View::make('suunnitelmat/MuokkausSuunnitelma.html');
+    }
   }
