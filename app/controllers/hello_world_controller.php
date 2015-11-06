@@ -23,9 +23,13 @@
     public static function lisaadrinkki() {
         View::make('suunnitelmat/LisaaDrinkkiSuunnitelma.html');
     }
+    
+    public static function drinkkiesittely() {
+        View::make('suunnitelmat/DrinkkiEsittely.html');
+    }
 
 
     public static function login() {
-        echo 'Kirjautumissivu';
+        View::make('suunnitelmat/LoginSuunnitelma.html');
     }
   }
