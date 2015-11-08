@@ -5,10 +5,27 @@ CREATE TABLE Drinker (
     password varchar(50) NOT NULL
 );
 
-CREATE TABLE Drink(
+CREATE TABLE Drink (
     id SERIAL PRIMARY KEY,
     name varchar(50) NOT NULL,
     in_stock boolean DEFAULT FALSE,
     description varchar(400),
     added DATE
+);
+
+CREATE TABLE Ingredient (
+id SERIAL PRIMARY KEY,
+name varchar(50) NOT NULL,
+saldo float,
+description varchar(500)
+);
+
+CREATE TABLE Favourite (
+FOREIGN KEY(juoja) REFERENCES Drinker(id),
+FOREIGN KEY(drinkki) REFERENCES Drink(id)
+);
+
+CREATE TABLE DrinkIngredient (
+FOREIGN KEY(drinkki) REFERENCES Drink(id),
+FOREIGN KEY(ainesosa) REFERENCES Ingredient(id)
 );
