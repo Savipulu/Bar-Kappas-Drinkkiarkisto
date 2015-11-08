@@ -9,8 +9,12 @@ CREATE TABLE Drink (
     id SERIAL PRIMARY KEY,
     name varchar(50) NOT NULL,
     in_stock boolean DEFAULT FALSE,
-    description varchar(400),
-    added DATE
+alcohol_content float NOT NULL,
+volume integer NOT NULL,
+glass varchar(50),
+drink_type varchar(50),
+    description varchar(500),
+    time integer
 );
 
 CREATE TABLE Ingredient (
