@@ -25,11 +25,15 @@ description varchar(500)
 );
 
 CREATE TABLE Favourite (
+juoja integer NOT NULL,
+drinkki integer NOT NULL,
 FOREIGN KEY(juoja) REFERENCES Drinker(id),
 FOREIGN KEY(drinkki) REFERENCES Drink(id)
 );
 
 CREATE TABLE DrinkIngredient (
+drinkki integer NOT NULL,
+ainesosa integer NOT NULL,
 FOREIGN KEY(drinkki) REFERENCES Drink(id),
 FOREIGN KEY(ainesosa) REFERENCES Ingredient(id)
 );
