@@ -9,31 +9,31 @@ CREATE TABLE Drink (
     id SERIAL PRIMARY KEY,
     name varchar(50) NOT NULL,
     in_stock boolean DEFAULT FALSE,
-alcohol_content float NOT NULL,
-volume integer NOT NULL,
-glass varchar(50),
-drink_type varchar(50),
+    alcohol_content float NOT NULL,
+    volume integer NOT NULL,
+    glass varchar(50),
+    drink_type varchar(50),
     description varchar(500),
     time integer
 );
 
 CREATE TABLE Ingredient (
-id SERIAL PRIMARY KEY,
-name varchar(50) NOT NULL,
-saldo float,
-description varchar(500)
+    id SERIAL PRIMARY KEY,
+    name varchar(50) NOT NULL,
+    saldo float,
+    description varchar(500)
 );
 
 CREATE TABLE Favourite (
-juoja integer NOT NULL,
-drinkki integer NOT NULL,
-FOREIGN KEY(juoja) REFERENCES Drinker(id),
-FOREIGN KEY(drinkki) REFERENCES Drink(id)
+    juoja integer,
+    drinkki integer,
+    FOREIGN KEY(juoja) REFERENCES Drinker(id),
+    FOREIGN KEY(drinkki) REFERENCES Drink(id)
 );
 
 CREATE TABLE DrinkIngredient (
-drinkki integer NOT NULL,
-ainesosa integer NOT NULL,
-FOREIGN KEY(drinkki) REFERENCES Drink(id),
-FOREIGN KEY(ainesosa) REFERENCES Ingredient(id)
+    drinkki integer,
+    ainesosa integer,
+    FOREIGN KEY(drinkki) REFERENCES Drink(id),
+    FOREIGN KEY(ainesosa) REFERENCES Ingredient(id)
 );
