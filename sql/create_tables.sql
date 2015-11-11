@@ -14,7 +14,7 @@ CREATE TABLE Drink (
     glass varchar(50),
     drink_type varchar(50),
     description varchar(500),
-    time integer
+    preparation_time integer
 );
 
 CREATE TABLE Ingredient (
