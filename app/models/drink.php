@@ -61,4 +61,25 @@ class Drink extends BaseModel {
         }
         return null;
     }
+    
+    public function save(){
+//        $query = DB::connection()->prepare(
+//                'INSERT INTO Drink ('
+//                . 'name,'
+//                . ' alcohol_content,'
+//                . ' volume, glass,'
+//                . ' drink_type,'
+//                . ' description,'
+//                . ' preparation_time'
+//                . ') VALUES ('
+//                . ':name,'
+//                . ' :alcohol_content,'
+//                . ' :volume,'
+//                . ' :glass,'
+//                . ' :drink_type,'
+//                . ' :description,'
+//                . ' :preparation_time'
+//                . ') RETURNING id');
+        //Tähän query->execute
+    }
 }
