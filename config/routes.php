@@ -35,3 +35,7 @@ HelloWorldController::muokkaus();
 $routes->get('/kirjautuminen', function() {
 HelloWorldController::login();
 });
+
+$routes->get('/drink', function(){
+DrinkController::index();
+});

@@ -1,5 +1,5 @@
 <?php
-  require 'app/models/drink.php';
+
   class HelloWorldController extends BaseController{
 
     public static function index(){
