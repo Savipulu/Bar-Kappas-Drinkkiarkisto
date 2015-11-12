@@ -1,27 +1,27 @@
 <?php
 
 $routes->get('/', function() {
-HelloWorldController::index();
+    DrinkController::index();
 });
 
 $routes->get('/hiekkalaatikko', function() {
-HelloWorldController::sandbox();
+    HelloWorldController::sandbox();
 });
 
 $routes->get('/suunnitelmat/etusivu', function() {
-HelloWorldController::testi();
+    HelloWorldController::testi();
 });
 
 $routes->get('/suunnitelmat/drinkit', function() {
-HelloWorldController::drinkit();
+    HelloWorldController::drinkit();
 });
 
 $routes->get('/suunnitelmat/lisaadrinkki', function() {
-HelloWorldController::lisaadrinkki();
+    HelloWorldController::lisaadrinkki();
 });
 
 $routes->get('/suunnitelmat/drinkkiesittely', function() {
-HelloWorldController::drinkkiesittely();
+    HelloWorldController::drinkkiesittely();
 });
 
 $routes->get('/suunnitelmat/login', function() {
@@ -29,13 +29,17 @@ $routes->get('/suunnitelmat/login', function() {
 });
 
 $routes->get('/suunnitelmat/muokkaus', function() {
-HelloWorldController::muokkaus();
+    HelloWorldController::muokkaus();
 });
 
 $routes->get('/kirjautuminen', function() {
-HelloWorldController::login();
+    HelloWorldController::login();
 });
 
-$routes->get('/drink', function(){
-DrinkController::index();
+$routes->get('/drinks', function() {
+    DrinkController::index();
+});
+
+$routes->get('/drinks/:id', function($id) {
+    DrinkController::show($id);
 });
