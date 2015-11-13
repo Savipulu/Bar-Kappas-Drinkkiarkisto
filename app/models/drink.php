@@ -15,14 +15,14 @@ class Drink extends BaseModel {
     public function __construct($attributes) {
         parent::__construct($attributes);
     }
-    
+
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Drink');
         $query->execute();
-        
+
         $rows = $query->fetchAll();
         $drinks = array();
-        
+
         foreach ($rows as $row) {
             $drinks[] = new Drink(array(
                 'id' => $row['id'],
@@ -36,16 +36,16 @@ class Drink extends BaseModel {
                 'preparation_time' => $row['preparation_time']
             ));
         }
-        
+
         return $drinks;
     }
-    
-    public static function find($id){
+
+    public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Drink WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-        
-        if($row){
+
+        if ($row) {
             $drink = new Drink(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
@@ -61,25 +61,38 @@ class Drink extends BaseModel {
         }
         return null;
     }
-    
-    public function save(){
-//        $query = DB::connection()->prepare(
-//                'INSERT INTO Drink ('
-//                . 'name,'
-//                . ' alcohol_content,'
-//                . ' volume, glass,'
-//                . ' drink_type,'
-//                . ' description,'
-//                . ' preparation_time'
-//                . ') VALUES ('
-//                . ':name,'
-//                . ' :alcohol_content,'
-//                . ' :volume,'
-//                . ' :glass,'
-//                . ' :drink_type,'
-//                . ' :description,'
-//                . ' :preparation_time'
-//                . ') RETURNING id');
-        //Tähän query->execute
+
+    public function save() {
+        $query = DB::connection()->prepare(
+                'INSERT INTO Drink ('
+                . 'name,'
+                . ' alcohol_content,'
+                . ' volume,'
+                . ' glass,'
+                . ' drink_type,'
+                . ' description,'
+                . ' preparation_time'
+                . ') VALUES ('
+                . ' :name,'
+                . ' :alcohol_content,'
+                . ' :volume,'
+                . ' :glass,'
+                . ' :drink_type,'
+                . ' :description,'
+                . ' :preparation_time'
+                . ') RETURNING id');
+
+        $query->execute(array('name' => $this->name,
+            'alcohol_content' => $this->alcohol_content,
+            'volume' => $this->volume,
+            'glass' => $this->glass,
+            'drink_type' => $this->drink_type,
+            'description' => $this->description,
+            'preparation_time' => $this->preparation_time));
+        
+        $row = $query->fetch();
+        
+        $this->id = $row['id'];
     }
+
 }

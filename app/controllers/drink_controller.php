@@ -15,18 +15,22 @@ class DrinkController extends BaseController {
     public static function store() {
         $params = $_POST;
 
-        $drionk = new Drink(array(
-            'name' => $row['name'],
-            'alcohol_content' => $row['alcohol_content'],
-            'volume' => $row['volume'],
-            'glass' => $row['glass'],
-            'drink_type' => $row['drink_type'],
-            'description' => $row['description'],
-            'preparation_time' => $row['preparation_time']
+        $drink = new Drink(array(
+            'name' => $params['name'],
+            'alcohol_content' => $params['alcohol_content'],
+            'volume' => $params['volume'],
+            'glass' => $params['glass'],
+            'drink_type' => $params['drink_type'],
+            'description' => $params['description'],
+            'preparation_time' => $params['preparation_time']
         ));
         
         $drink->save();
         
-        Redirect::to('/drink/' . $drink->id, array('message' => 'Peli on lisätty kirjastoosi!'));
+        Redirect::to('/drink/' . $drink->id, array('message' => 'Drinkki on lisätty arkistoon!'));
+    }
+
+    public static function create() {
+        View::make('drink/newdrink.html');
     }
 }

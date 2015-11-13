@@ -40,14 +40,14 @@ $routes->get('/drinks', function() {
     DrinkController::index();
 });
 
+$routes->get('/drinks/newdrink', function() {
+    DrinkController::create();
+});
+
 $routes->get('/drinks/:id', function($id) {
     DrinkController::show($id);
 });
 
 $routes->post('/drink', function(){
     DrinkController::store();
-});
-
-$routes->get('drink/new', function(){
-    DrinkController::create();
 });

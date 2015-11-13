@@ -1,40 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa tietuetta Rommikola</h1>
+<h1>Muokkaa tietuetta Rommikola</h1>
 
-  <form>
+<form>
     <div class="form-group">
-      <label>Nimi</label>
-      <input type="text" class="form-control" value="Rommikola">
+        <label>Nimi</label>
+        <input type="text" class="form-control" value="Rommikola">
     </div>
     <div class="form-group">
-      <label>Varastossa</label>
-      <input type="text" class="form-control" value="Ei">
+        <label>Varastossa</label>
+        <input type="text" class="form-control" value="Ei">
     </div>
     <div class="form-group">
-      <label>Ainesosat</label>
+        <label>Ainesosat</label>
     </div>
     <div class="form-inline">
-      <input type="text" class="form-control" value="Rommi">
-      <button type="submit" class="btn btn-danger">Poista ainesosa</button>
+        <label>Rommi</label>
+        <input type="text" class="form-control" value="">
+        <button type="submit" class="btn btn-danger">Poista ainesosa</button>
     </div>
     <div class="form-inline">
-      <input type="text" class="form-control" value="Kola">
-      <button type="submit" class="btn btn-danger">Poista ainesosa</button>
+        <label>Kola</label>
+        <input type="text" class="form-control" value="">
+        <button type="submit" class="btn btn-danger">Poista ainesosa</button>
     </div>
     <div class="form-group">
-      <label>Lisää ainesosia</label>
+        <button type="submit" class="btn btn-success">Lisää ainesosa</button>
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-success">Lisää ainesosa</button>
+        <label>Kuvaus</label>
+        <textarea class="form-control"> Rommia ja kolaa
+        </textarea>
     </div>
     <div class="form-group">
-      <label>Kuvaus</label>
-      <textarea class="form-control"> Rommia ja kolaa
-      </textarea>
+        <button type="submit" class="btn btn-primary">Tallenna</button>
     </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Tallenna</button>
-    </div>
-  </form>
+</form>
 {% endblock %}
