@@ -29,7 +29,7 @@ $routes->get('/suunnitelmat/login', function() {
 });
 
 $routes->get('/suunnitelmat/muokkaus', function() {
-    HelloWorldController::muokkaus();
+    
 });
 
 $routes->get('/kirjautuminen', function() {
@@ -44,10 +44,26 @@ $routes->get('/drinks/newdrink', function() {
     DrinkController::create();
 });
 
-$routes->get('/drinks/:id', function($id) {
-    DrinkController::show($id);
+$routes->get('/drinks/:id/edit', function($id) {
+    DrinkController::edit($id);
 });
 
-$routes->post('/drink', function(){
+$routes->post('/drinks/:id/edit', function($id) {
+    DrinkController::update($id);
+});
+
+$routes->post('/drinks/:id/destroy', function($id) {
+    DrinkController::destroy($id);
+});
+
+$routes->get('/drinks/:id', function($id) {
+    if (is_numeric($id)) {
+        DrinkController::show($id);
+    } else {
+        Redirect::to('/');
+    }
+});
+
+$routes->post('/drink', function() {
     DrinkController::store();
 });

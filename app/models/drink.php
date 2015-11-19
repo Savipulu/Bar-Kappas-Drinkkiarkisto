@@ -96,6 +96,39 @@ class Drink extends BaseModel {
         $this->id = $row['id'];
     }
     
+    public static function update() {
+        $query = DB::connection()->prepare(
+                'UPDATE Drink ('
+                . 'name,'
+                . ' alcohol_content,'
+                . ' volume,'
+                . ' glass,'
+                . ' drink_type,'
+                . ' description,'
+                . ' preparation_time'
+                . ') SET ('
+                . ' :name,'
+                . ' :alcohol_content,'
+                . ' :volume,'
+                . ' :glass,'
+                . ' :drink_type,'
+                . ' :description,'
+                . ' :preparation_time'
+                . ') RETURNING id');
+
+        $query->execute(array('name' => $this->name,
+            'alcohol_content' => $this->alcohol_content,
+            'volume' => $this->volume,
+            'glass' => $this->glass,
+            'drink_type' => $this->drink_type,
+            'description' => $this->description,
+            'preparation_time' => $this->preparation_time));
+        
+        $row = $query->fetch();
+        
+        $this->id = $row['id'];
+    }
+    
     public function validate_name() {
         $errors = array();
         if($this->validatable_attribute_is_null($this->name)) {
