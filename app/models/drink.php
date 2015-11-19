@@ -14,6 +14,7 @@ class Drink extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_alcoholcontent', 'validate_volume', 'validate_preparationtime');
     }
 
     public static function all() {
@@ -94,5 +95,49 @@ class Drink extends BaseModel {
         
         $this->id = $row['id'];
     }
-
+    
+    public function validate_name() {
+        $errors = array();
+        if($this->validatable_attribute_is_null($this->name)) {
+            $errors[] = 'Nimi ei saa olla tyhjä';
+        }
+        if(!$this->validate_string_length($this->name, 3)) {
+            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä';
+        }
+        
+        return $errors;
+    }
+    
+    public function validate_alcoholcontent() {
+        $errors = array();
+        if ($this->validatable_attribute_is_null($this->alcohol_content)) {
+            $errors[] = 'Alkoholipitoisuus ei saa olla tyhjä';
+        }
+        if ($this->validatable_attribute_is_negative($this->alcohol_content)) {
+            $errors[] = 'Alkoholipitoisuus ei voi olla negatiivinen';
+        }
+        if ($this->alcohol_content > 100) {
+            $errors[] = 'Alkoholipitoisuus ei voi olla yli sata prosenttia';
+        }
+        
+        return $errors;
+    }
+    
+    public function validate_volume() {
+        $errors = array();
+        if ($this->validatable_attribute_is_negative($this->volume)) {
+            $errors[] = 'Tilavuus ei voi olla negatiivinen';
+        }
+        
+        return $errors;
+    }
+    
+    public function validate_preparationtime() {
+        $errors = array();
+        if ($this->validatable_attribute_is_negative($this->preparation_time)) {
+            $errors[] = 'Valmistusaika ei voi olla negatiivinen';
+        }
+        
+        return $errors;
+    }
 }

@@ -8,10 +8,14 @@
     }
 
     public static function sandbox(){
-      $rommikola = Drink::find(1);
-      $drinks = Drink::all();
-      Kint::dump($drinks);
-      Kint::dump($rommikola);
+      $rommikola = new Drink(array(
+          'name' => 'ro',
+          'alcohol_content' => 105,
+          'volume' => -2,
+          'preparation_time' => -3));
+      $errors = $rommikola->errors();
+      
+      Kint::dump($errors);
     }
     
     public static function testi() {

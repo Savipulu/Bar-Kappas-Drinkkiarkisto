@@ -15,7 +15,7 @@ class DrinkController extends BaseController {
     public static function store() {
         $params = $_POST;
 
-        $drink = new Drink(array(
+        $attributes = array(
             'name' => $params['name'],
             'alcohol_content' => $params['alcohol_content'],
             'volume' => $params['volume'],
@@ -23,14 +23,22 @@ class DrinkController extends BaseController {
             'drink_type' => $params['drink_type'],
             'description' => $params['description'],
             'preparation_time' => $params['preparation_time']
-        ));
-        
-        $drink->save();
-        
-        Redirect::to('/drink/' . $drink->id, array('message' => 'Drinkki on lisätty arkistoon!'));
+        );
+
+        $drink = new Drink($attributes);
+        $errors = $drink->errors();
+
+        if (count($errors) == 0) {
+            $drink->save();
+
+            Redirect::to('/drinks/' . $drink->id, array('message' => 'Drinkki on lisätty arkistoon!'));
+        } else {
+            View::make('drink/newdrink.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
     }
 
     public static function create() {
         View::make('drink/newdrink.html');
     }
+
 }
