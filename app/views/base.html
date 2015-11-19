@@ -7,7 +7,7 @@
 
         <title>
             {% block title %}
-            Tietokantasovellus
+            Drinkkiarkisto
             {% endblock %}
         </title>
 
@@ -39,11 +39,35 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="nav navbar-nav">
                         <!-- Navigaation linkit -->
-                        <li><a href="{{base_path}}/suunnitelmat/drinkit">Drinkit</a></li>
+                        <li><a href="{{base_path}}/drinks">Drinkit</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{base_path}}/suunnitelmat/login">Kirjaudu sisään</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kirjaudu sisään<span class="caret"></span></a>
+                            <ul id="kirjautumispalkki" class="dropdown-menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-11">
+                                            <form class="form" role="form" method="post" action="{{base_path}}/login" accept-charset="UTF-8">
+                                                <div class="form-group">
+                                                    <label>Käyttäjätunnus</label>
+                                                    <input type="text" class="form-control" id="username" value="{{username}}" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Salasana</label>
+                                                    <input type="password" class="form-control" id="password" value="{{password}}" required>
+                                                    <div class="help-block text-right"><a href="">Salasanan palauttaminen</a></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-block">Kirjaudu sisään</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

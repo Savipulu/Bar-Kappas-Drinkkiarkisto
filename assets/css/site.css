@@ -9,6 +9,14 @@
   margin: 0px auto;
 }
 
+#kirjautumispalkki{
+    width: 200px;
+}
+
+#kirjautumispalkki .form-group{
+    margin: 10px;
+}
+
 body {
 	background-color: #A3C2C2;
 }
