@@ -8,6 +8,7 @@
     }
 
     public static function sandbox(){
+        echo 'Tervetuloa!';
       $rommikola = new Drink(array(
           'name' => 'ro',
           'alcohol_content' => 105,
