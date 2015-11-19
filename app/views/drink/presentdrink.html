@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
 {% if message is not empty %}
 <div class="alert alert-success">
     {{message}}
@@ -8,9 +9,10 @@
 
 <h1>{{drink.name}}</h1>
 
-<p>
+<div style="height:50px;">
     <button class="btn btn-default">Ainesosat</button>
-</p>
+    {{forms.destroy_button("#{base_path}/drinks/#{drink.id}/destroy")}}
+</div>
 
 <ul>
     <li><strong>Varastossa:</strong>

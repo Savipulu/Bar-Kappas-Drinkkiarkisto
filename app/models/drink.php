@@ -90,57 +90,56 @@ class Drink extends BaseModel {
             'drink_type' => $this->drink_type,
             'description' => $this->description,
             'preparation_time' => $this->preparation_time));
-        
+
         $row = $query->fetch();
-        
+
         $this->id = $row['id'];
     }
-    
-    public static function update() {
-        $query = DB::connection()->prepare(
-                'UPDATE Drink ('
-                . 'name,'
-                . ' alcohol_content,'
-                . ' volume,'
-                . ' glass,'
-                . ' drink_type,'
-                . ' description,'
-                . ' preparation_time'
-                . ') SET ('
-                . ' :name,'
-                . ' :alcohol_content,'
-                . ' :volume,'
-                . ' :glass,'
-                . ' :drink_type,'
-                . ' :description,'
-                . ' :preparation_time'
-                . ') RETURNING id');
 
-        $query->execute(array('name' => $this->name,
+    public function update() {
+        $query = DB::connection()->prepare(
+                'UPDATE Drink '
+                . ' SET '
+                . ' name = :name,'
+                . ' alcohol_content = :alcohol_content,'
+                . ' volume = :volume,'
+                . ' glass = :glass,'
+                . ' drink_type = :drink_type,'
+                . ' description = :description,'
+                . ' preparation_time = :preparation_time'
+                . ' WHERE id = :id');
+
+
+        $query->execute(array(
+            'id' => $this->id,
+            'name' => $this->name,
             'alcohol_content' => $this->alcohol_content,
             'volume' => $this->volume,
             'glass' => $this->glass,
             'drink_type' => $this->drink_type,
             'description' => $this->description,
             'preparation_time' => $this->preparation_time));
-        
+
         $row = $query->fetch();
-        
-        $this->id = $row['id'];
     }
-    
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Drink WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
     public function validate_name() {
         $errors = array();
-        if($this->validatable_attribute_is_null($this->name)) {
+        if ($this->validatable_attribute_is_null($this->name)) {
             $errors[] = 'Nimi ei saa olla tyhjä';
         }
-        if(!$this->validate_string_length($this->name, 3)) {
+        if (!$this->validate_string_length($this->name, 3)) {
             $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä';
         }
-        
+
         return $errors;
     }
-    
+
     public function validate_alcoholcontent() {
         $errors = array();
         if ($this->validatable_attribute_is_null($this->alcohol_content)) {
@@ -152,25 +151,26 @@ class Drink extends BaseModel {
         if ($this->alcohol_content > 100) {
             $errors[] = 'Alkoholipitoisuus ei voi olla yli sata prosenttia';
         }
-        
+
         return $errors;
     }
-    
+
     public function validate_volume() {
         $errors = array();
         if ($this->validatable_attribute_is_negative($this->volume)) {
             $errors[] = 'Tilavuus ei voi olla negatiivinen';
         }
-        
+
         return $errors;
     }
-    
+
     public function validate_preparationtime() {
         $errors = array();
         if ($this->validatable_attribute_is_negative($this->preparation_time)) {
             $errors[] = 'Valmistusaika ei voi olla negatiivinen';
         }
-        
+
         return $errors;
     }
+
 }

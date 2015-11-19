@@ -50,6 +50,7 @@ class DrinkController extends BaseController {
         $params = $_POST;
         
         $attributes = array(
+            'id' => $id,
             'name' => $params['name'],
             'alcohol_content' => $params['alcohol_content'],
             'volume' => $params['volume'],
@@ -62,11 +63,12 @@ class DrinkController extends BaseController {
         $drink = new Drink($attributes);
         $errors = $drink->errors();
         
-        if(count($errors) > 0) {
-            View::make('drink/edit.html', array('errors' => $errors, 'attributes' => $attributes));
-        } else {
+        if(count($errors) == 0) {
             $drink->update();
             Redirect::to('/drinks/' . $drink->id, array('message' => 'Drinkkiä muokattu onnistuneesti'));
+        } else {
+            
+            View::make('drink/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
     
@@ -74,7 +76,7 @@ class DrinkController extends BaseController {
         $drink = new Drink(array('id' => $id));
         $drink->destroy();
         
-        Redirect::to('/drinks', array('message' => 'Drinkki poistettu onnistuneesti'));
+        Redirect::to('/drinks', array('message' => 'Drinkki poistettu'));
     }
 
 }
