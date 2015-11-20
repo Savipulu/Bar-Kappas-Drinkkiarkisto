@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Drinkkiarkisto</h1>
+{% if message is not empty %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+{% if get_user_logged_in %}
+<h1>Käyttäjän {{get_user_logged_in.name}} Drinkkiarkisto</h1>
+{% endif %}
 
 <p>
     <a href="{{base_path}}/drinks/newdrink" class="btn btn-success">Lisää drinkki</a>

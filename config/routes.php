@@ -67,3 +67,7 @@ $routes->get('/drinks/:id', function($id) {
 $routes->post('/drink', function() {
     DrinkController::store();
 });
+
+$routes->post('/login', function() {
+    DrinkerController::handle_login(); 
+});
