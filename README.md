@@ -13,4 +13,16 @@ Linkit suunniteltuihin näkymiin:
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Drinkkiarkisto.html) 
+[linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Drinkkiarkisto.html) 
+
+## Käyttäjätunnukset
+
+Normaalikäyttäjän tunnukset:
+
+* Käyttäjätunnus: Kayttaja
+* Salasana: Salasana1
+
+Ylläpitäjän oikeuksilla varustettu käyttäjä:
+
+* Käyttäjätunnus: Yllapitaja
+* Salasana: Salasana2
