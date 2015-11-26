@@ -42,7 +42,6 @@ class DrinkController extends BaseController {
     }
     
     public static function edit($id) {
-        self::check_logged_in();
         $drink = Drink::find($id);
         View::make('drink/edit.html', array('attributes' => $drink));
     }

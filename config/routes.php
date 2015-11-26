@@ -1,5 +1,9 @@
 <?php
 
+function check_logged_in() {
+    BaseController::check_logged_in();
+}
+
 $routes->get('/', function() {
     DrinkController::index();
 });
@@ -40,11 +44,11 @@ $routes->get('/drinks', function() {
     DrinkController::index();
 });
 
-$routes->get('/drinks/newdrink', function() {
+$routes->get('/drinks/newdrink', 'check_logged_in', function() {
     DrinkController::create();
 });
 
-$routes->get('/drinks/:id/edit', function($id) {
+$routes->get('/drinks/:id/edit', 'check_logged_in', function($id) {
     DrinkController::edit($id);
 });
 
@@ -70,6 +74,14 @@ $routes->post('/drink', function() {
 
 $routes->get('/ingredients', function() {
     IngredientController::index();
+});
+
+$routes->get('/ingredients/:id', function($id) {
+    if (is_numeric($id)) {
+        IngredientController::show($id);
+    } else {
+        Redirect::to('/ingredients');
+    }
 });
 
 $routes->post('/login', function() {

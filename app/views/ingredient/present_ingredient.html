@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% import "macros/forms.html" as forms %}
+
+{% if message is not empty %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
+<h1>{{ingredient.name}}</h1>
+
+{% endblock %}
