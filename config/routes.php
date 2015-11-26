@@ -68,6 +68,10 @@ $routes->post('/drink', function() {
     DrinkController::store();
 });
 
+$routes->get('/ingredients', function() {
+    IngredientController::index();
+});
+
 $routes->post('/login', function() {
     DrinkerController::handle_login(); 
 });
