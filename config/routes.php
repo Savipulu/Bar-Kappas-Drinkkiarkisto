@@ -71,3 +71,7 @@ $routes->post('/drink', function() {
 $routes->post('/login', function() {
     DrinkerController::handle_login(); 
 });
+
+$routes->post('/logout', function() {
+    DrinkerController::logout();
+});

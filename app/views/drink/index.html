@@ -5,8 +5,10 @@
     {{message}}
 </div>
 {% endif %}
-{% if get_user_logged_in %}
-<h1>Käyttäjän {{get_user_logged_in.name}} Drinkkiarkisto</h1>
+{% if user_logged_in %}
+    <h1>Käyttäjän {{user_logged_in.name}} Drinkkiarkisto</h1>
+{% else %}
+    <h1>Drinkkiarkisto</h1>
 {% endif %}
 
 <p>
