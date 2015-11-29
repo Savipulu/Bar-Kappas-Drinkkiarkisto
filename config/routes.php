@@ -5,7 +5,7 @@ function check_logged_in() {
 }
 
 $routes->get('/', function() {
-    DrinkController::index();
+    HelloWorldController::index();
 });
 
 $routes->get('/hiekkalaatikko', function() {

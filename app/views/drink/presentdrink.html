@@ -10,7 +10,7 @@
 <h1>{{drink.name}}</h1>
 
 <div style="height:50px;">
-    <button class="btn btn-default">Ainesosat</button>
+    {{forms.ingredient_button}}
     {{forms.destroy_button("#{base_path}/drinks/#{drink.id}/destroy")}}
 </div>
 
