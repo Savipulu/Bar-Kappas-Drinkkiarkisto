@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+{% import "macros/forms.html" as forms %}
+{% import "macros/alerts.html" as alerts%}
+
+<h1>Lisää uusi ainesosa</h1>
+
+{% if errors %}
+{{alerts.error_message(errors)}}
+{% endif %}
+
+<form method="post" action="{{base_path}}/ingredient">
+    <div class="form-group">
+        <label>Nimi</label>
+        <input type="text" name="name" class="form-control" value="{{attributes.name}}">
+    </div>
+    
+    <div class="form-group">
+        <label>Varastosaldo</label>
+        <input type="text" name="saldo" class="form-control" value="{{attributes.saldo}}">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Kuvaus</label>
+        <input name="description" id="description" class="form-control" value="{{attributes.description}}">
+    </div>
+
+    {{forms.save_button(action, "Lisää")}}
+
+</form>
+
+{% endblock %}

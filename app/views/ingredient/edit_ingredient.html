@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+{% import "macros/forms.html" as forms %}
+{% import "macros/alerts.html" as alerts %}
+
+{% if message is not empty %}
+{{alerts.success_message(message)}}
+{% endif %}
+
+<h1>Muokkaa tietuetta {{attributes.name}}</h1>
+
+<form method='post' action='{{base_path}}/ingredients/{{attributes.id}}/edit'>
+    <div class="form-group">
+        <strong>Nimi: </strong><input type="text" name="name" class="form-control" value="{{attributes.name}}">
+        <strong>Saldo: </strong><input type="text" name="saldo" class="form-control" value="{{attributes.saldo}}">
+        <strong>Kuvaus: </strong><input type="text" name="description" class="form-control" value="{{attributes.description}}">
+    </div>
+    
+    {{forms.save_button("#{base_path}/ingredients/#{attributes.id}/edit")}}
+</form>
+
+{% endblock %}

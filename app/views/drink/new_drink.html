@@ -1,15 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
+{% import "macros/bars.html" as bars%}
+
 <h1>Lisää drinkki arkistoon</h1>
 
 {% if errors %}
-<div class="alert alert-danger">
-    <ul>
-        {% for error in errors %}
-        <li>{{error}}</li>
-        {% endfor %}
-    </ul>
-</div>
+{{bars.error_bar(errors)}}
 {% endif %}
 
 <form method="post" action="{{base_path}}/drink">
@@ -45,8 +42,9 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
-            <li><a href="#">Ainesosa 1</a></li>
-            <li><a href="#">Ainesosa 2</a></li>
+            {% for ingredient in ingredients %}
+            <li><a href="#">{{ingredient.name}}</a></li>
+            {% endfor %}
         </ul>
     </div>
 
@@ -59,9 +57,7 @@
         <label for="description">Kuvaus</label>
         <input name="description" id="description" class="form-control" value="{{attributes.description}}">
     </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Lisää</button>
-    </div>
+    
+    {{forms.save_button(action, "Lisää")}}
 </form>
 {% endblock %}

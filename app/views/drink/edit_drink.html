@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-{% if message is not empty %}
 {% import "macros/forms.html" as forms %}
-<div class="alert alert-success">
-    {{message}}
-</div>
+{% import "macros/alerts.html" as alerts %}
+
+{% if message is not empty %}
+{{alerts.success_message(message)}}
 {% endif %}
 
-<h1>{{attributes.name}}</h1>
+<h1>Muokkaa kohdetta {{attributes.name}}</h1>
 
-<div>
-    <button class="btn btn-default">Ainesosat</button>
+<div style="height: 50px">
+{{forms.ingredient_button}}
 </div>
 
 <form method='post' action='{{base_path}}/drinks/{{attributes.id}}/edit'>
@@ -28,7 +28,5 @@
         <button type="submit" class="btn btn-primary">Tallenna</button>
     </div>
 </form>
-<p>
-    {{drink.description}}
-</p>
+
 {% endblock %}

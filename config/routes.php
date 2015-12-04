@@ -48,16 +48,16 @@ $routes->get('/drinks/newdrink', 'check_logged_in', function() {
     DrinkController::create();
 });
 
+$routes->post('/drinks/:id/destroy', function($id) {
+    DrinkController::destroy($id);
+});
+
 $routes->get('/drinks/:id/edit', 'check_logged_in', function($id) {
     DrinkController::edit($id);
 });
 
 $routes->post('/drinks/:id/edit', function($id) {
     DrinkController::update($id);
-});
-
-$routes->post('/drinks/:id/destroy', function($id) {
-    DrinkController::destroy($id);
 });
 
 $routes->get('/drinks/:id', function($id) {
@@ -72,8 +72,20 @@ $routes->post('/drink', function() {
     DrinkController::store();
 });
 
-$routes->get('/ingredients', function() {
-    IngredientController::index();
+$routes->get('/ingredients/newingredient', function() {
+    IngredientController::create();
+});
+
+$routes->post('/ingredients/:id/destroy', function($id) {
+    IngredientController::destroy($id);
+});
+
+$routes->get('/ingredients/:id/edit', 'check_logged_in', function($id) {
+    IngredientController::edit($id);
+});
+
+$routes->post('/ingredients/:id/edit', function($id) {
+    IngredientController::update($id);
 });
 
 $routes->get('/ingredients/:id', function($id) {
@@ -82,6 +94,14 @@ $routes->get('/ingredients/:id', function($id) {
     } else {
         Redirect::to('/ingredients');
     }
+});
+
+$routes->get('/ingredients', function() {
+    IngredientController::index();
+});
+
+$routes->post('/ingredient', function() {
+    IngredientController::store();
 });
 
 $routes->post('/login', function() {

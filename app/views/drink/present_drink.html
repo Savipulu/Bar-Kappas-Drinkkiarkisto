@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
-{% if message is not empty %}
-<div class="alert alert-success">
-    {{message}}
-</div>
+{% import "macros/alerts.html" as alerts %}
+
+{% if message is not empty %} 
+{{alerts.success_message(message)}}
 {% endif %}
 
-<h1>{{drink.name}}</h1>
+<h1>
+    {{drink.name}}
+    {% if user_logged_in %}
+    {{forms.destroy_button("#{base_path}/drinks/#{drink.id}/destroy")}}
+    {% endif %}
+</h1>
 
 <div style="height:50px;">
     {{forms.ingredient_button}}
-    {{forms.destroy_button("#{base_path}/drinks/#{drink.id}/destroy")}}
 </div>
 
 <ul>
@@ -33,4 +37,9 @@
 <p>
     {{drink.description}}
 </p>
+
+{% if user_logged_in %}
+{{forms.edit_button("#{base_path}/drinks/#{drink.id}/edit")}}
+{% endif %}
+
 {% endblock %}

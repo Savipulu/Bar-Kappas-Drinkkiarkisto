@@ -4,12 +4,17 @@
 {% import "macros/forms.html" as forms %}
 
 {% if message is not empty %}
-<div class="alert alert-success">
-    {{message}}
-</div>
+{{alerts.succes_message(message)}}
 {% endif %}
 
-<h1>{{ingredient.name}}</h1>
+<div>
+    <h1>
+        {{ingredient.name}}
+        {% if user_logged_in %}
+        {{forms.destroy_button("#{base_path}/ingredients/#{ingredient.id}/destroy")}}
+        {% endif %}
+    </h1>
+</div>
 
 <ul>
     <li><strong>Varastossa: </strong>{{ingredient.saldo}}</li>
@@ -18,5 +23,9 @@
 <p>
     {{ingredient.description}}
 </p>
+
+{% if user_logged_in %}
+{{forms.edit_button("#{base_path}/ingredients/#{ingredient.id}/edit")}}
+{% endif %}
 
 {% endblock %}

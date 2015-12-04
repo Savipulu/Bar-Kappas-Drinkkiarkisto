@@ -9,7 +9,7 @@ class Ingredient extends BaseModel {
     
     public function __construct($attributes) {
         parent::__construct($attributes);
-        //this->validators
+        $this->validators = array('validate_name');
     }
     
     public static function all() {
@@ -46,6 +46,63 @@ class Ingredient extends BaseModel {
             return $ingredient;
         }
         return null;
+    }
+    
+    public function save() {
+        $query = DB::connection()->prepare(
+                'INSERT INTO Ingredient ('
+                . 'name,'
+                . ' saldo,'
+                . ' description'
+                . ') VALUES ('
+                . ' :name,'
+                . ' :saldo,'
+                . ' :description'
+                . ') RETURNING id');
+
+        $query->execute(array('name' => $this->name,
+            'saldo' => $this->saldo,
+            'description' => $this->description));
+
+        $row = $query->fetch();
+
+        $this->id = $row['id'];
+    }
+    
+    public function update() {
+        $query = DB::connection()->prepare(
+                'UPDATE Ingredient '
+                . ' SET '
+                . ' name = :name,'
+                . ' saldo = :saldo,'
+                . ' description = :description'
+                . ' WHERE id = :id');
+
+
+        $query->execute(array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'saldo' => $this->saldo,
+            'description' => $this->description));
+
+        $row = $query->fetch();
+    }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Ingredient WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+    
+    public function validate_name() {
+        $errors = array();
+        if ($this->validatable_attribute_is_null($this->name)) {
+            $errors[] = 'Nimi ei saa olla tyhjä';
+        }
+        if (!$this->validate_string_length($this->name, 3)) {
+            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä';
+        }
+
+        return $errors;
     }
 }
 

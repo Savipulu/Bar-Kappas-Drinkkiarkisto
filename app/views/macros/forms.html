@@ -1,9 +1,32 @@
+<!--Lisäysnappi-->
+{% macro add_button(path, text) %}
+<p>
+    <a href="{{path}}" class="btn btn-success">{{text|default('Lisää')}}</a>
+</p>
+{% endmacro %}
+
+<!--Poistonappi-->
 {% macro destroy_button(action, text) %}
 <form method="post" action="{{action}}" style="display: inline-block">
     <button type="submit" class="btn btn-danger">{{text|default('Poista')}}</button>
 </form>
 {% endmacro %}
 
+<!--Muokkausnappi-->
+{% macro edit_button(action, text) %}
+<form method="get" action="{{action}}" style="display: inline-block">
+    <button type="submit" class="btn btn-primary">{{text|default('Muokkaa')}}</button>
+</form>
+{% endmacro %}
+
+<!--Tallenusnappi-->
+{% macro save_button(action, text) %}
+<form method="post" action="{{action}}" style="display: inline-block">
+    <button type="submit" class="btn btn-primary">{{text|default('Tallenna')}}</button>
+</form>
+{% endmacro %}
+
+<!--Aineosien näyttäminen-->
 {% macro ingredient_button() %}
 <!--Muista lisätä tänne ainesosa napin toiminto ja poistaa disablointi!-->
 <form method="post" style="display: inline-block">

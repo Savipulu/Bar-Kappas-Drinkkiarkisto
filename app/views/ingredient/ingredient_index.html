@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
+{% import "macros/alerts.html" as alerts %}
+
+{% if message is not empty %}
+{{alerts.success_message(message)}}
+{% endif %}
+
+<h1>Ainesosat</h1>
+
+{% if user_logged_in %}
+{{forms.add_button("#{base_path}/ingredients/newingredient", "Lisää ainesosa")}}
+{% endif %}
+
 <table class="table table-striped table-condensed">
     <thead>
         <tr>

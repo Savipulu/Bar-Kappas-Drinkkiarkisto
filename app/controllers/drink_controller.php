@@ -4,12 +4,17 @@ class DrinkController extends BaseController {
 
     public static function index() {
         $drinks = Drink::all();
-        View::make('drink/index.html', array('drinks' => $drinks));
+        View::make('drink/drink_index.html', array('drinks' => $drinks));
     }
 
     public static function show($id) {
         $one_drink = Drink::find($id);
-        View::make('drink/presentdrink.html', array('drink' => $one_drink));
+        View::make('drink/present_drink.html', array('drink' => $one_drink));
+    }
+    
+    public static function create() {
+        $ingredients = Ingredient::all();
+        View::make('drink/new_drink.html', array('ingredients' => $ingredients));
     }
 
     public static function store() {
@@ -33,17 +38,13 @@ class DrinkController extends BaseController {
 
             Redirect::to('/drinks/' . $drink->id, array('message' => 'Drinkki on lisätty arkistoon!'));
         } else {
-            View::make('drink/newdrink.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('drink/new_drink.html', array('errors' => $errors, 'attributes' => $attributes));
         }
-    }
-
-    public static function create() {
-        View::make('drink/newdrink.html');
     }
     
     public static function edit($id) {
         $drink = Drink::find($id);
-        View::make('drink/edit.html', array('attributes' => $drink));
+        View::make('drink/edit_drink.html', array('attributes' => $drink));
     }
     
     public static function update($id) {
@@ -68,7 +69,7 @@ class DrinkController extends BaseController {
             Redirect::to('/drinks/' . $drink->id, array('message' => 'Drinkkiä muokattu onnistuneesti'));
         } else {
             
-            View::make('drink/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('drink/edit_drink.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
     

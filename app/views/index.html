@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/bars.html" as bars %}
+
+{% if message is not empty %}
+{{bars.message_bar(message)}}
+{% endif %}
+
+{% if errors %}
+{{bars.error_bar(errors)}}
+{% endif %}
 
 <h1>Tervetuloa Bar Kappa's drinkkiarkistoon!</h1> 
 

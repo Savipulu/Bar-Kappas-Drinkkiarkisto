@@ -8,7 +8,8 @@ class DrinkerController extends BaseController {
         $drinker = Drinker::authenticate($params['name'], $params['password']);
         
         if (!$drinker){
-            View::make('/', array('error' => 'Väärä käyttäjätunnus tai salasana', 'username' => $params['name']));
+            $errors = array('Väärä käyttäjätunnus tai salasana');
+            View::make('index.html', array('errors' => $errors, 'username' => $params['name']));
         } else {
             $_SESSION['user'] = $drinker->id;
             
