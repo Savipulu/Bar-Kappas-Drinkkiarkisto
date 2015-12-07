@@ -21,7 +21,7 @@
     <thead>
         <tr>
             <th>Nimi</th>
-            <th>Varastossa</th>
+            <th>Saatavilla</th>
             <th>Alkoholipitoisuus</th>
             <th>Tilavuus</th>
             <th>Lasisuositus</th>
@@ -33,17 +33,17 @@
 
     <tbody>
         {% for drink in drinks %}
-        {% if drink.in_stock %}
+        {% if drink.check_availability %}
         <tr class="success">
         {% else %}
         <tr class="danger">
         {% endif %}
             <td><a href="{{base_path}}/drinks/{{drink.id}}">{{drink.name}}</td>
             <td>
-                {% if drink.in_stock %}
-                <label class="label label-success">varastossa
+                {% if drink.check_availability %}
+                <label class="label label-success">Kyllä
                 {% else %}
-                <label class="label label-danger">ei varastossa
+                <label class="label label-danger">Ei
                 {% endif %}
                         
                 </td>

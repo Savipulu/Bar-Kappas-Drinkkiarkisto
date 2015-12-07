@@ -18,6 +18,13 @@
     margin: 10px;
 }
 
+#ainesosataulukko {
+    width: 350px;
+    background-color: #d1e0e0;
+    border: #000;
+    margin: 10px;
+}
+
 body {
 	background-color: #A3C2C2;
 }

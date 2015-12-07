@@ -14,13 +14,34 @@
     {% endif %}
 </h1>
 
-<div style="height:50px;">
-    {{forms.ingredient_button}}
+<div class="row" style="width: 300px; margin: 10px" >
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Ainesosat</h3>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ainesosa</th>
+                    <th>Määrä</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ingredient in recipe %}
+                <tr>
+                    <td><a href="{{base_path}}/ingredients/{{ingredient.ingredient_id}}">{{ingredient.name}}</a></td>
+                    <td>{{ingredient.amount}} cl</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
+
 
 <ul>
     <li><strong>Varastossa:</strong>
-        {% if drink.in_stock %}
+        {% if drink.check_availability %}
         <label class="label label-success">Kyllä
         {% else %}
         <label class="label label-danger">Ei
@@ -28,7 +49,7 @@
         </label>
     </li>
     <li><strong>Alkoholipitoisuus: </strong>{{drink.alcohol_content}}</li>
-    <li><strong>Tilavuus: </strong>{{drink.volume}}</li>
+    <li><strong>Tilavuus: </strong>{{drink.volume}} cl</li>
     <li><strong>Lasisuositus: </strong>{{drink.glass}}</li>
     <li><strong>Juomatyyppi: </strong>{{drink.drink_type}}</li>
     <li><strong>Valmistusaika: </strong>{{drink.preparation_time}}</li>

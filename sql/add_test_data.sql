@@ -11,8 +11,12 @@ INSERT INTO Drink (name, alcohol_content, volume, glass, drink_type, description
 
 INSERT INTO Ingredient (name, saldo, description) VALUES ('Rommi', 100.0, 'Suosittu alkoholijuoma');
 INSERT INTO Ingredient (name, saldo, description) VALUES ('Coca-cola', 100.0, 'Tunnettu kolajuoma');
+INSERT INTO Ingredient (name, saldo) VALUES ('Gin', 6);
+INSERT INTO Ingredient (name, saldo) VALUES ('Vermutti', 0); 
 
 INSERT INTO Favourite (drinker, drink) VALUES (1, 1);
 
-INSERT INTO DrinkIngredient (drink, ingredient, amount) VALUES (1, 1, 100.0);
-INSERT into DrinkIngredient (drink, ingredient, amount) VALUES (1, 2, 100.0);
+INSERT INTO Recipes (drink, ingredient, amount) VALUES (1, 1, 100.0);
+INSERT INTO Recipes (drink, ingredient, amount) VALUES (1, 2, 100.0);
+INSERT INTO Recipes (drink, ingredient, amount) VALUES (2, 3, 6);
+INSERT INTO Recipes (drink, ingredient, amount) VALUES (2, 4, 1);

@@ -4,7 +4,6 @@ class Drink extends BaseModel {
 
     public $id,
             $name,
-            $in_stock,
             $alcohol_content,
             $volume,
             $glass,
@@ -28,7 +27,6 @@ class Drink extends BaseModel {
             $drinks[] = new Drink(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
-                'in_stock' => $row['in_stock'],
                 'alcohol_content' => $row['alcohol_content'],
                 'volume' => $row['volume'],
                 'glass' => $row['glass'],
@@ -50,7 +48,6 @@ class Drink extends BaseModel {
             $drink = new Drink(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
-                'in_stock' => $row['in_stock'],
                 'alcohol_content' => $row['alcohol_content'],
                 'volume' => $row['volume'],
                 'glass' => $row['glass'],
@@ -127,6 +124,22 @@ class Drink extends BaseModel {
         $query = DB::connection()->prepare('DELETE FROM Drink WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
+    
+    public function check_availability() {
+        $query = DB::connection()->prepare('SELECT r.amount, i.saldo FROM Recipes r '
+                . 'JOIN Ingredient i ON r.ingredient = i.id '
+                . 'WHERE r.drink = :id');
+        $query->execute(array('id' => $this->id));
+        
+        $rows = $query->fetchAll();
+        
+        foreach($rows as $row) {
+            if ($row['amount'] > $row['saldo']) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public function validate_name() {
         $errors = array();
@@ -142,23 +155,36 @@ class Drink extends BaseModel {
 
     public function validate_alcoholcontent() {
         $errors = array();
+        
         if ($this->validatable_attribute_is_null($this->alcohol_content)) {
             $errors[] = 'Alkoholipitoisuus ei saa olla tyhjä';
         }
+        
         if ($this->validatable_attribute_is_negative($this->alcohol_content)) {
             $errors[] = 'Alkoholipitoisuus ei voi olla negatiivinen';
         }
+        
         if ($this->alcohol_content > 100) {
             $errors[] = 'Alkoholipitoisuus ei voi olla yli sata prosenttia';
         }
+        
+        if (!is_numeric($this->alcohol_content)) {
+            $errors[] = 'Alkoholipitoisuuden tulee olla luku';
+        }
+        
 
         return $errors;
     }
 
     public function validate_volume() {
         $errors = array();
+        
         if ($this->validatable_attribute_is_negative($this->volume)) {
             $errors[] = 'Tilavuus ei voi olla negatiivinen';
+        }
+        
+        if (!is_numeric($this->volume)) {
+            $errors[] = 'Tilavuuden tulee olla luku';
         }
 
         return $errors;
@@ -166,8 +192,13 @@ class Drink extends BaseModel {
 
     public function validate_preparationtime() {
         $errors = array();
+        
         if ($this->validatable_attribute_is_negative($this->preparation_time)) {
             $errors[] = 'Valmistusaika ei voi olla negatiivinen';
+        }
+        
+        if (!is_numeric($this->preparation_time)) {
+            $errors[] = 'Valmistusajan tulee olla luku';
         }
 
         return $errors;

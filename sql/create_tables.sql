@@ -8,7 +8,6 @@ CREATE TABLE Drinker (
 CREATE TABLE Drink (
     id SERIAL PRIMARY KEY,
     name varchar(50) NOT NULL,
-    in_stock boolean DEFAULT FALSE,
     alcohol_content float NOT NULL,
     volume integer NOT NULL,
     glass varchar(50),
@@ -31,7 +30,7 @@ CREATE TABLE Favourite (
     FOREIGN KEY(drink) REFERENCES Drink(id)
 );
 
-CREATE TABLE DrinkIngredient (
+CREATE TABLE Recipes (
     drink integer NOT NULL,
     ingredient integer NOT NULL,
     amount float NOT NULL,

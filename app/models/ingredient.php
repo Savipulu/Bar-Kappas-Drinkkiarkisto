@@ -9,7 +9,7 @@ class Ingredient extends BaseModel {
     
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name');
+        $this->validators = array('validate_name', 'validate_saldo');
     }
     
     public static function all() {
@@ -95,13 +95,25 @@ class Ingredient extends BaseModel {
     
     public function validate_name() {
         $errors = array();
+        
         if ($this->validatable_attribute_is_null($this->name)) {
             $errors[] = 'Nimi ei saa olla tyhjä';
         }
+        
         if (!$this->validate_string_length($this->name, 3)) {
             $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä';
         }
 
+        return $errors;
+    }
+    
+    public function validate_saldo() {
+        $errors = array();
+        
+        if ($this->validatable_attribute_is_negative($this->saldo)) {
+            $errors[] = 'Saldo ei voi olla negatiivinen';
+        } 
+        
         return $errors;
     }
 }

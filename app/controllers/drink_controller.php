@@ -9,7 +9,8 @@ class DrinkController extends BaseController {
 
     public static function show($id) {
         $one_drink = Drink::find($id);
-        View::make('drink/present_drink.html', array('drink' => $one_drink));
+        $recipe = DrinkIngredients::find($id);
+        View::make('drink/present_drink.html', array('drink' => $one_drink, 'recipe' => $recipe));
     }
     
     public static function create() {
