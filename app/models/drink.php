@@ -16,9 +16,14 @@ class Drink extends BaseModel {
         $this->validators = array('validate_name', 'validate_alcoholcontent', 'validate_volume', 'validate_preparationtime');
     }
 
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Drink');
-        $query->execute();
+    public static function all($options) {
+        $query_string = 'SELECT * FROM Drink';
+        if (isset($options['search'])) {
+            $query_string .= ' WHERE name LIKE :like';
+            $options['like'] = '%' . $options['search'] . '%';
+        }
+        $query = DB::connection()->prepare($query_string);
+        $query->execute(array('like' => $options['like']));
 
         $rows = $query->fetchAll();
         $drinks = array();
@@ -121,7 +126,10 @@ class Drink extends BaseModel {
     }
 
     public function destroy() {
+        $reference_query = DB::connection()->prepare('DELETE FROM Recipes WHERE drink = :id');
         $query = DB::connection()->prepare('DELETE FROM Drink WHERE id = :id');
+        
+        $reference_query->execute(array('id' => $this->id));
         $query->execute(array('id' => $this->id));
     }
     

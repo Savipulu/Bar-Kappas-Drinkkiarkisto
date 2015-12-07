@@ -7,7 +7,7 @@
 
 <!--Poistonappi-->
 {% macro destroy_button(action, text) %}
-<form method="post" action="{{action}}" style="display: inline-block">
+<form method="post" action="{{action}}" style="display: inline-block" class="destroy-form" data-confirm="Vahvista poistaminen">
     <button type="submit" class="btn btn-danger">{{text|default('Poista')}}</button>
 </form>
 {% endmacro %}
@@ -32,4 +32,24 @@
 <form method="post" style="display: inline-block">
     <button type="submit" class="btn btn-default disabled">Ainesosat</button>
 </form>
+{% endmacro %}
+
+<!--Tilapäinen ainesosamacro, korvaa myöhemmin javascript -versiolla-->
+{% macro ingredient_bar() %}
+<div method=style="margin-top: 10px" class="ingredient-form">
+        <label style="margin-top: 10px">Ainesosat</label>
+        <div class="form-group">
+            <div class="col-lg-4">
+                <select class="form-control" name="ingredient" style="margin-bottom: 10px">
+                    {% for ingredient in ingredients %}
+                    <option value="{{ingredient.ingredient_id}}">{{ingredient.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" name="amount" class="form-control" value="{{attributes.amount}}">
+            </div>
+            {{forms.destroy_button(action, "Poista ainesosa")}}
+        </div>
+    </div>
 {% endmacro %}

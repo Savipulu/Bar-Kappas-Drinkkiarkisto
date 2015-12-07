@@ -3,7 +3,14 @@
 class DrinkController extends BaseController {
 
     public static function index() {
-        $drinks = Drink::all();
+        $params = $_GET;
+        $options = array();
+        
+        if (isset($params['search'])) {
+            $options['search'] = $params['search'];
+        }
+
+        $drinks = Drink::all($options);
         View::make('drink/drink_index.html', array('drinks' => $drinks));
     }
 
@@ -12,7 +19,7 @@ class DrinkController extends BaseController {
         $recipe = DrinkIngredients::find($id);
         View::make('drink/present_drink.html', array('drink' => $one_drink, 'recipe' => $recipe));
     }
-    
+
     public static function create() {
         $ingredients = Ingredient::all();
         View::make('drink/new_drink.html', array('ingredients' => $ingredients));
@@ -42,15 +49,15 @@ class DrinkController extends BaseController {
             View::make('drink/new_drink.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
-    
+
     public static function edit($id) {
         $drink = Drink::find($id);
         View::make('drink/edit_drink.html', array('attributes' => $drink));
     }
-    
+
     public static function update($id) {
         $params = $_POST;
-        
+
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
@@ -61,23 +68,23 @@ class DrinkController extends BaseController {
             'description' => $params['description'],
             'preparation_time' => $params['preparation_time']
         );
-        
+
         $drink = new Drink($attributes);
         $errors = $drink->errors();
-        
-        if(count($errors) == 0) {
+
+        if (count($errors) == 0) {
             $drink->update();
             Redirect::to('/drinks/' . $drink->id, array('message' => 'Drinkkiä muokattu onnistuneesti'));
         } else {
-            
+
             View::make('drink/edit_drink.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
-    
+
     public static function destroy($id) {
         $drink = new Drink(array('id' => $id));
         $drink->destroy();
-        
+
         Redirect::to('/drinks', array('message' => 'Drinkki poistettu'));
     }
 

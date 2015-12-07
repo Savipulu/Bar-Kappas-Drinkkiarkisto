@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
-{% import "macros/bars.html" as bars%}
+{% import "macros/alerts.html" as alerts %}
 
 <h1>Lisää drinkki arkistoon</h1>
 
 {% if errors %}
-{{bars.error_bar(errors)}}
+{{alerts.error_bar(errors)}}
 {% endif %}
 
 <form method="post" action="{{base_path}}/drink">
@@ -19,33 +19,41 @@
         <label for="alcohol_content">Alkoholipitoisuus</label>
         <input type="text" name="alcohol_content" class="form-control" value="{{attributes.alcohol_content}}">
     </div>
+
     <div class="col-xs-3">
         <label for="volume">Tilavuus</label>
         <input type="text" name="volume" class="form-control" value="{{attributes.volume}}">
     </div>
+
     <div class="col-xs-3">
         <label for="drink_type">Juomatyyppi</label>
         <input type="text" name="drink_type" class="form-control" value="{{attributes.drink_type}}">
     </div>
+
     <div class="col-xs-3">
         <label for="preparation_time">Valmistusaika</label>
         <input type="text" name="preparation_time" class="form-control" value="{{attributes.preparation_time}}">
     </div>
 
-    <div>
-        <label>Ainesosat</label>
+    <div style="margin-top: 10px">
+        <label style="margin-top: 10px">Ainesosat</label>
+        <div class="form-group">
+            <div class="col-lg-4">
+                <select class="form-control" name="ingredient" style="margin-bottom: 10px">
+                    {% for ingredient in ingredients %}
+                    <option value="{{ingredient.ingredient_id}}">{{ingredient.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-4">
+                <input type="text" name="amount" class="form-control" value="{{attributes.amount}}">
+            </div>
+            {{forms.destroy_button(action, "Poista ainesosa")}}
+        </div>
     </div>
 
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
-            Lisää ainesosa
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            {% for ingredient in ingredients %}
-            <li><a href="#">{{ingredient.name}}</a></li>
-            {% endfor %}
-        </ul>
+    <div>
+        <button class="btn btn-default" style="margin-bottom: 10px">Lisää ainesosa</button>
     </div>
 
     <div class="form-group">
@@ -57,7 +65,7 @@
         <label for="description">Kuvaus</label>
         <input name="description" id="description" class="form-control" value="{{attributes.description}}">
     </div>
-    
+
     {{forms.save_button(action, "Lisää")}}
 </form>
 {% endblock %}
