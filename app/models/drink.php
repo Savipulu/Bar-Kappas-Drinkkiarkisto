@@ -21,9 +21,11 @@ class Drink extends BaseModel {
         if (isset($options['search'])) {
             $query_string .= ' WHERE name LIKE :like';
             $options['like'] = '%' . $options['search'] . '%';
+            unset($options['search']);
         }
+        
         $query = DB::connection()->prepare($query_string);
-        $query->execute(array('like' => $options['like']));
+        $query->execute($options);
 
         $rows = $query->fetchAll();
         $drinks = array();

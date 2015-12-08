@@ -12,9 +12,16 @@ class Ingredient extends BaseModel {
         $this->validators = array('validate_name', 'validate_saldo');
     }
     
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Ingredient');
-        $query->execute();
+    public static function all($options) {
+        $query_string = 'SELECT * FROM Ingredient';
+        if (isset($options['search'])) {
+            $query_string .= ' WHERE name LIKE :like';
+            $options['like'] = '%' . $options['search'] . '%';
+            unset($options['search']);
+        }
+        
+        $query = DB::connection()->prepare($query_string);
+        $query->execute($options);
         
         $rows = $query->fetchAll();
         $ingredients = array();

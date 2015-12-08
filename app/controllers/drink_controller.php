@@ -9,7 +9,7 @@ class DrinkController extends BaseController {
         if (isset($params['search'])) {
             $options['search'] = $params['search'];
         }
-
+        
         $drinks = Drink::all($options);
         View::make('drink/drink_index.html', array('drinks' => $drinks));
     }
@@ -21,7 +21,7 @@ class DrinkController extends BaseController {
     }
 
     public static function create() {
-        $ingredients = Ingredient::all();
+        $ingredients = Ingredient::all(null);
         View::make('drink/new_drink.html', array('ingredients' => $ingredients));
     }
 

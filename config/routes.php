@@ -111,3 +111,14 @@ $routes->post('/login', function() {
 $routes->post('/logout', function() {
     DrinkerController::logout();
 });
+
+$routes->get('/search', function() {
+    $params = $_GET;
+    $search_select = $params['search-select'];
+    
+    if ($search_select == 'ingredients') {
+        IngredientController::index();
+    } else {
+        DrinkController::index();
+    }
+});

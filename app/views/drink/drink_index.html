@@ -17,14 +17,6 @@
 {{forms.add_button("#{base_path}/drinks/newdrink", "Lisää drinkki")}}
 {% endif %}
 
-<form method="get" action="" class="form-inline">
-    <div class="form group">
-        <input type="text" name="search" class="form-control" placeholder="Hakusana">
-    </div>
-
-    <button type="submit" class="btn btn-default">Hae</button>
-</form>
-
 <table class="table table-striped table-condensed">
     <thead>
         <tr>
@@ -50,19 +42,19 @@
             <td>
                 {% if drink.check_availability %}
                 <label class="label label-success">Kyllä
-                    {% else %}
-                    <label class="label label-danger">Ei
-                        {% endif %}
-
-                        </td>
-                        <td>{{drink.alcohol_content}}%</td>
-                        <td>{{drink.volume}}cl</td>
-                        <td>{{drink.glass}}</td>
-                        <td>{{drink.drink_type}}</td>
-                        <td>{{drink.description}}</td>
-                        <td>{{drink.preparation_time}} min</td>
-                        </tr>
-                        {% endfor %}
-                        </tbody>
-                        </table>
-                        {% endblock %}
+                {% else %}
+                <label class="label label-danger">Ei
+                {% endif %}
+                
+            </td>
+            <td>{{drink.alcohol_content}}%</td>
+            <td>{{drink.volume}}cl</td>
+            <td>{{drink.glass}}</td>
+            <td>{{drink.drink_type}}</td>
+            <td>{{drink.description}}</td>
+            <td>{{drink.preparation_time}} min</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

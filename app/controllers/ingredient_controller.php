@@ -3,7 +3,14 @@
 class IngredientController extends BaseController {
     
     public static function index() {
-        $ingredients = Ingredient::all();
+        $params = $_GET;
+        $options = array();
+        
+        if (isset($params['search'])) {
+            $options['search'] = $params['search'];
+        }
+        
+        $ingredients = Ingredient::all($options);
         View::make('ingredient/ingredient_index.html', array ('ingredients' => $ingredients));
     }
     
