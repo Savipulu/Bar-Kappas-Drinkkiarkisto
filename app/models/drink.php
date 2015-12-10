@@ -96,7 +96,7 @@ class Drink extends BaseModel {
             'preparation_time' => $this->preparation_time));
 
         $row = $query->fetch();
-
+        
         $this->id = $row['id'];
     }
 

@@ -34,26 +34,74 @@
         <label for="preparation_time">Valmistusaika</label>
         <input type="text" name="preparation_time" class="form-control" value="{{attributes.preparation_time}}">
     </div>
-
-    <div style="margin-top: 10px">
+    
+    <div style="margin-top: 10px;">
         <label style="margin-top: 10px">Ainesosat</label>
         <div class="form-group">
-            <div class="col-lg-4">
-                <select class="form-control" name="ingredient" style="margin-bottom: 10px">
+            <div class="col-lg-5">
+                <select class="form-control" name="ingredient1" style="margin-bottom: 10px">
                     {% for ingredient in ingredients %}
                     <option value="{{ingredient.ingredient_id}}">{{ingredient.name}}</option>
                     {% endfor %}
                 </select>
             </div>
-            <div class="col-lg-4">
-                <input type="text" name="amount" class="form-control" value="{{attributes.amount}}">
+            <div class="col-lg-5">
+                <input type="text" name="amount1" class="form-control" value="{{attributes.amount}}">
             </div>
-            {{forms.destroy_button(action, "Poista ainesosa")}}
+            <button type="submit" class="btn btn-danger" disabled>Poista ainesosa</button>
+        </div>
+    </div>
+    
+    <div>
+        <div class="form-group">
+            <div class="col-lg-5">
+                <select class="form-control" name="ingredient2" style="margin-bottom: 10px">
+                    {% for ingredient in ingredients %}
+                    <option value="{{ingredient.ingredient_id}}">{{ingredient.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" name="amount2" class="form-control" value="{{attributes.amount}}">
+            </div>
+            <button type="submit" class="btn btn-danger" disabled>Poista ainesosa</button>
+        </div>
+    </div>
+    
+    <div>
+        <div class="form-group">
+            <div class="col-lg-5">
+                <select class="form-control" name="ingredient3" style="margin-bottom: 10px">
+                    {% for ingredient in ingredients %}
+                    <option value="{{ingredient.ingredient_id}}">{{ingredient.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" name="amount3" class="form-control" value="{{attributes.amount}}">
+            </div>
+            <button type="submit" class="btn btn-danger" disabled>Poista ainesosa</button>
+        </div>
+    </div>
+    
+    <div>
+        <div class="form-group">
+            <div class="col-lg-5">
+                <select class="form-control" name="ingredient4" style="margin-bottom: 10px">
+                    {% for ingredient in ingredients %}
+                    <option value="{{ingredient.ingredient_id}}">{{ingredient.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-5">
+                <input type="text" name="amount4" class="form-control" value="{{attributes.amount}}">
+            </div>
+            <button type="submit" class="btn btn-danger" disabled>Poista ainesosa</button>
         </div>
     </div>
 
     <div>
-        <button class="btn btn-default" style="margin-bottom: 10px">Lisää ainesosa</button>
+        <button class="btn btn-default" style="margin-bottom: 10px" disabled>Lisää ainesosa</button>
     </div>
 
     <div class="form-group">

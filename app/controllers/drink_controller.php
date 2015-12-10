@@ -29,7 +29,7 @@ class DrinkController extends BaseController {
         $params = $_POST;
 
         $attributes = array(
-            'name' => $params['name'],
+            'name' => '*Ehdotettu* - ' . $params['name'],
             'alcohol_content' => $params['alcohol_content'],
             'volume' => $params['volume'],
             'glass' => $params['glass'],
