@@ -8,6 +8,7 @@ class Drinker extends BaseModel {
     
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name');
     }
     
     public static function find($id) {
@@ -42,6 +43,36 @@ class Drinker extends BaseModel {
         } else {
             return null;
         }
+    }
+    
+    public function save() {
+        $query = DB::connection()->prepare(
+                'INSERT INTO Drinker ('
+                . 'name,'
+                . ' password'
+                . ') VALUES ('
+                . ' :name,'
+                . ' :password'
+                . ') RETURNING id');
+
+        $query->execute(array('name' => $this->name,
+            'password' => $this->password));
+
+        $row = $query->fetch();
+        
+        $this->id = $row['id'];
+    }
+    
+    public function validate_name() {
+        $errors = array();
+        if ($this->validatable_attribute_is_null($this->name)) {
+            $errors[] = 'Nimi ei saa olla tyhjä';
+        }
+        if (!$this->validate_string_length($this->name, 3)) {
+            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä';
+        }
+
+        return $errors;
     }
 }
 

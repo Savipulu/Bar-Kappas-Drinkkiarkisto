@@ -21,5 +21,29 @@ class DrinkerController extends BaseController {
         $_SESSION['user'] = null;
         Redirect::to('/', array('message' => 'Olet kirjautunut ulos'));
     }
+    
+    public static function create() {
+        View::make('register.html');
+    }
+    
+    public static function store() {
+        $params = $_POST;
+
+        $attributes = array(
+            'name' => $params['name'],
+            'password' => $params['password']
+        );
+
+        $drinker = new Drinker($attributes);
+        $errors = $drinker->errors();
+
+        if (count($errors) == 0) {
+            $drinker->save();
+
+            self::handle_login();
+        } else {
+            View::make('/register', array('errors' => $errors, 'attributes' => $attributes));
+        }
+    }
 }
 

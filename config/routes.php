@@ -112,6 +112,14 @@ $routes->post('/logout', function() {
     DrinkerController::logout();
 });
 
+$routes->post('/registerdrinker', function() {
+    DrinkerController::store();
+});
+
+$routes->get('/register', function() {
+    DrinkerController::create();
+});
+
 $routes->get('/search', function() {
     $params = $_GET;
     $search_select = $params['search-select'];
